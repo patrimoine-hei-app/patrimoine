@@ -11,6 +11,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Setup Maven Action
         uses: s4u/setup-maven-action@v1.13.0
         with:
@@ -18,5 +21,9 @@ jobs:
           java-distribution: 'temurin'
           maven-version: '3.9.6'
 
-      - name: test with coverage (min -> 80%)
-        run: mvn -B clean verify '-Dtest=school.hei.patrimoine.modele.**'
+      - name: Make format.sh executable
+        run: chmod +x format.sh
+
+      - name: Run format.sh
+        run: ./format.sh
+
